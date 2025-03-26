@@ -513,26 +513,26 @@ if st.session_state.pairs:
         #st.dataframe(data_low)
         range1 = data_high[ticker1] - data_low[ticker1]
         range2 = data_high[ticker2] - data_low[ticker2]
-        valid_days = (range1>0) & (range2>0)
+        #valid_days = (range1>0) & (range2>0)
         #st.dataframe(valid_days)
         
-        range_ratio = range1/range2
-        range_ratio_filtered = range_ratio[valid_days]
+        range_diff = range1-range2
+        #range_ratio_filtered = range_ratio[valid_days]
 
         # Convert ratios to DataFrame for plotting
-        df_range_ratio = pd.DataFrame({"Time": range_ratio_filtered.index, "Range Ratio": range_ratio_filtered})
+        df_range_diff = pd.DataFrame({"Time": range_diff.index, "Range Ratio": range_diff})
 
 
         #st.dataframe(range1)
         #st.dataframe(range2)
         #st.dataframe(range_ratio_filtered)
         # Plot the residuals with custom color
-        fig_rr = px.line(df_range_ratio, x="Time", y="Range Ratio", title=f"Range ratio {ticker1}/{ticker2}", color_discrete_sequence=['#A55B4B'])
+        fig_rr = px.line(df_range_diff, x="Time", y="Range Ratio", title=f"Range ratio {ticker1}/{ticker2}", color_discrete_sequence=['#A55B4B'])
         
 
         # Display the plot in Streamlit
         st.plotly_chart(fig_rr)
-        st.dataframe(df_range_ratio)
+        st.dataframe(df_range_diff)
         
 
                 
