@@ -528,11 +528,11 @@ if st.session_state.pairs:
         #st.dataframe(range_ratio_filtered)
         # Plot the residuals with custom color
         fig_rr = px.line(df_range_ratio, x="Time", y="Range Ratio", title=f"Range ratio {ticker1}/{ticker2}", color_discrete_sequence=['#A55B4B'])
-        st.dataframe(df_range_ratio)
+        
 
         # Display the plot in Streamlit
         st.plotly_chart(fig_rr)
-        
+        st.dataframe(df_range_ratio)
         
 
                 
