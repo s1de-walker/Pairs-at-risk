@@ -511,7 +511,14 @@ if st.session_state.pairs:
         st.write("Range Ratio")
         st.dataframe(data_high)
         st.dataframe(data_low)
-        
+        range1 = data_high[ticker1] - data_low[ticker1]
+        range2 = data_high[ticker2] - data_low[ticker2]
+        range_ratio = range1/range2
+
+
+        st.dataframe(range1)
+        st.dataframe(range2)
+        st.dataframe(range_ratio)
         
         
 
