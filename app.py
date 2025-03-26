@@ -509,6 +509,10 @@ if st.session_state.pairs:
     # ------------------------------------
     with st.expander(f"Range Ratio"):
         st.write("Range Ratio")
+        st.dataframe(data_high)
+        st.dataframe(data_low)
+        
+        
         
 
                 
