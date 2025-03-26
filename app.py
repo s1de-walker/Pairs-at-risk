@@ -500,6 +500,13 @@ if st.session_state.pairs:
             st.success("Trading Signal: Buy (Residuals are below the lower threshold)")
         elif df_coint.iloc[-1] > upper_bound3:
             st.error("Trading Signal: Sell (Residuals are above the upper threshold)")
+
+
+    # Range Ratio
+    # ------------------------------------
+    with st.expander(f"Range Ratio"):
+        st.write("Range Ratio")
+
                 
                 
 
