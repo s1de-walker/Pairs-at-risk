@@ -459,7 +459,7 @@ if st.session_state.pairs:
             x1=df_coint_plot["Time"].max(),
             y0=0,
             y1=0,
-            line=dict(color="grey", width=2, dash="dot")
+            line=dict(color="white", width=2, dash="dot")
         )
 
 
