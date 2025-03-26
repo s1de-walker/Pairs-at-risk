@@ -151,6 +151,16 @@ if st.session_state.pairs:
             x=data.index.min(), y=upper_bound, text=f"{100 - percentile}th Percentile",
             showarrow=False, xanchor="left", font=dict(color="grey", size=10), bgcolor="black"
         )
+        # Add a translucent film from lower bound to upper bound with custom color
+        fig.add_shape(
+            type="rect",
+            x0=data.index.min(),
+            x1=data.index.max(),
+            y0=lower_bound,
+            y1=upper_bound,
+            fillcolor="rgba(64,64,64, 0.7)",  # Custom color with 30% opacity
+            line=dict(width=0)
+        )
     
         st.plotly_chart(fig)
         
