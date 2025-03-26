@@ -456,6 +456,17 @@ if st.session_state.pairs:
          # Add horizontal lines for percentiles and mean
         fig_cr.add_hline(y=upper_bound3, line_dash="solid", line_color="white")
         fig_cr.add_hline(y=lower_bound3, line_dash="solid", line_color="white")
+
+        # Add a translucent film from lower bound to upper bound with custom color
+        fig_cr.add_shape(
+            type="rect",
+            x0=df_coint_plot["Time"].min(),
+            x1=df_coint_plot["Time"].max(),
+            y0=lower_bound3,
+            y1=upper_bound3,
+            fillcolor="rgba(128, 128, 128, 0.3)",  # Custom color with 30% opacity
+            line=dict(width=0)
+        )
         
         # Display the plot in Streamlit
         st.plotly_chart(fig_cr)
