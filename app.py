@@ -527,7 +527,7 @@ if st.session_state.pairs:
         #st.dataframe(range2)
         #st.dataframe(range_ratio_filtered)
         # Plot the residuals with custom color
-        fig_rr = px.line(df_range_diff, x="Time", y="Range Ratio", title=f"Range ratio {ticker1}/{ticker2}", color_discrete_sequence=['#A55B4B'])
+        fig_rr = px.line(df_range_diff, x="Time", y="Range Difference", title=f"Range {ticker1}- Range {ticker2}", color_discrete_sequence=['#A55B4B'])
         
 
         # Display the plot in Streamlit
