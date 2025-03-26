@@ -254,6 +254,8 @@ if st.session_state.pairs:
                     title_text=None  # This removes the legend title
                 )
             )
+
+            
             # Show chart in Streamlit
             st.plotly_chart(fig_volatility_ratio)
 
@@ -304,6 +306,17 @@ if st.session_state.pairs:
                     x=0.5,
                     title_text=None  # This removes the legend title
                 )
+            )
+
+            # Add a translucent film from lower bound to upper bound with custom color
+            fig_volatility_ratio_gap.add_shape(
+                type="rect",
+                x0=volatility_ratio_gap_df["Date"].min(),
+                x1=volatility_ratio_gap_df["Date"].max(),
+                y0=lower_bound2,
+                y1=upper_bound2,
+                fillcolor="rgba(64,64,64, 0.7)",  # Custom color with 30% opacity
+                line=dict(width=0)
             )
     
             # Show chart in Streamlit
