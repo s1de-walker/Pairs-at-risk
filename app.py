@@ -507,8 +507,8 @@ if st.session_state.pairs:
 
     # Range Ratio
     # ------------------------------------
-    with st.expander(f"Range Ratio"):
-        st.write("Range Ratio")
+    with st.expander(f"Range Difference"):
+        #st.write("Range Ratio")
         #st.dataframe(data_high)
         #st.dataframe(data_low)
         range1 = data_high[ticker1] - data_low[ticker1]
