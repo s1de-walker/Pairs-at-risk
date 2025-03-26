@@ -603,8 +603,10 @@ elif range_signal == -1:
 
 if coint_signal == 1:
     st.warning(f"➖ Trading Signal: Short pair: {ticker2} undervalued or {ticker1} overvalued")
+    st.info("Check Cointegration")
 elif coint_signal == -1:
     st.success(f"➕ Trading Signal: Long pair: {ticker1} undervalued or {ticker2} overvalued")
+    st.info("Check Cointegration")
     
     
     
