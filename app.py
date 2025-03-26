@@ -520,7 +520,7 @@ if st.session_state.pairs:
         #range_ratio_filtered = range_ratio[valid_days]
 
         # Convert ratios to DataFrame for plotting
-        df_range_diff = pd.DataFrame({"Time": range_diff.index, "Range Ratio": range_diff})
+        df_range_diff = pd.DataFrame({"Time": range_diff.index, "Range Difference": range_diff})
 
 
         #st.dataframe(range1)
