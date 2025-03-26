@@ -511,6 +511,7 @@ if st.session_state.pairs:
         #st.write("Range Ratio")
         #st.dataframe(data_high)
         #st.dataframe(data_low)
+        st.write("Range = High - Low")
         range1 = data_high[ticker1] - data_low[ticker1]
         range2 = data_high[ticker2] - data_low[ticker2]
         #valid_days = (range1>0) & (range2>0)
