@@ -73,7 +73,12 @@ with st.form("pairs_form"):
     
 st.divider()
 # Input End------------------------------------
+
+# Signal initiation
+# =================
+
 price_ratio_signal = 0
+st_vol_signal = 0
 
 # Fetching data
 # ------------------------------------
@@ -328,8 +333,13 @@ if st.session_state.pairs:
 
 
         # Check if the spread crosses either of the thresholds
-        if volatility_ratio_gap_df['Volatility Ratio Gap'].iloc[-1] > upper_bound2 or volatility_ratio_gap_df['Volatility Ratio Gap'].iloc[-1] < lower_bound2:
-            st.error("🚨 Warning: The spread has crossed the threshold!")
+        if volatility_ratio_gap_df['Volatility Ratio Gap'].iloc[-1] > upper_bound2:
+            st.error("🚨 Warning: Short term volatility has spiked")
+            st_vol_signal = 1
+
+        elif volatility_ratio_gap_df['Volatility Ratio Gap'].iloc[-1] < lower_bound2:
+            st.error("🚨 Warning: Short term volatility has dropped significantly")
+            st_vol_signal = -1
 
 
     # Rolling Beta
@@ -574,13 +584,14 @@ if price_ratio_signal == 1:
 elif price_ratio_signal == -1:
     st.warning("➖ Short Signal: Price Ratio above upper bound")
 
+if st_vol_signal == 1:
+    st.error("🚨 Warning: Short term volatility has spiked")
+elif st_vol_signal == -1:
+    st.error("🚨 Warning: Short term volatility has dropped significantly")
+    
         
 
                 
-                
-
-        
-        
         
         
             
