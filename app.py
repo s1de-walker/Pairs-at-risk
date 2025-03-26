@@ -479,7 +479,7 @@ if st.session_state.pairs:
         )
 
 
-         # Add horizontal lines for percentiles and mean
+        # Add horizontal lines for percentiles and mean
         fig_cr.add_hline(y=upper_bound3, line_dash="solid", line_color="white")
         fig_cr.add_hline(y=lower_bound3, line_dash="solid", line_color="white")
 
@@ -523,17 +523,40 @@ if st.session_state.pairs:
         # Convert ratios to DataFrame for plotting
         df_range_diff = pd.DataFrame({"Time": range_diff.index, "Range Difference": range_diff})
 
-
         #st.dataframe(range1)
         #st.dataframe(range2)
         #st.dataframe(range_ratio_filtered)
         # Plot the residuals with custom color
         fig_rr = px.line(df_range_diff, x="Time", y="Range Difference", title=f"Range of {ticker1} - Range of {ticker2}", color_discrete_sequence=['#A55B4B'])
         
+        
+        # User input for percentile value
+        col1, col2, col3, col4, col5 = st.columns([2, 3, 1, 2, 3])
+        percentile4 = col1.number_input("Select Percentile:", min_value=50.00, max_value=99.99, value=95.00, format="%.2f", key="percentile_input_rrr")
+
+        lower_bound4 = np.percentile(df_range_diff['Range Difference'], 100-percentile4)
+        upper_bound4 = np.percentile(df_range_diff['Range Difference'], percentile4)
+
+        # Add horizontal lines for percentiles and mean
+        fig_rr.add_hline(y=upper_bound4, line_dash="solid", line_color="white")
+        fig_rr.add_hline(y=lower_bound4, line_dash="solid", line_color="white")
+
+        # Add a translucent film from lower bound to upper bound with custom color
+        fig_rr.add_shape(
+            type="rect",
+            x0=df_range_diff["Time"].min(),
+            x1=df_range_diff["Time"].max(),
+            y0=lower_bound4,
+            y1=upper_bound4,
+            fillcolor="rgba(64,64,64, 0.7)",  # Custom color with 30% opacity
+            line=dict(width=0)
+        )
+
+        
 
         # Display the plot in Streamlit
         st.plotly_chart(fig_rr)
-        st.dataframe(df_range_diff)
+        #st.dataframe(df_range_diff)
         
 
                 
