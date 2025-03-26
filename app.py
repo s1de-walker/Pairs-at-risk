@@ -88,6 +88,9 @@ if st.session_state.pairs:
         data["Pair Value"] = data[ticker1]*units1 - data[ticker2]*units2
         returns = data.pct_change().dropna()
         cm_returns = (returns + 1).cumprod() - 1
+
+        data_high = yf.download([ticker1, ticker2], start=start_date, end=end_date+ timedelta(days=1))["High"]
+        data_low = yf.download([ticker1, ticker2], start=start_date, end=end_date+ timedelta(days=1))["Low"]
         
         # Check if data is empty (invalid ticker)
         if data.empty or ticker1 not in data.columns or ticker2 not in data.columns:
@@ -506,6 +509,7 @@ if st.session_state.pairs:
     # ------------------------------------
     with st.expander(f"Range Ratio"):
         st.write("Range Ratio")
+        
 
                 
                 
