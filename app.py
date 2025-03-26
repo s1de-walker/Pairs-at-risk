@@ -168,9 +168,9 @@ if st.session_state.pairs:
         st.plotly_chart(fig)
         
         if data['Price Ratio'].iloc[-1] < lower_bound:
-            st.success("✅ Long Signal: Price Ratio below lower bound")
+            st.success("➕ Long Signal: Price Ratio below lower bound")
         elif data['Price Ratio'].iloc[-1] > upper_bound:
-            st.warning("⚠️ Short Signal: Price Ratio above upper bound")
+            st.warning("➖ Short Signal: Price Ratio above upper bound")
             
     # Pair spread
     # ------------------------------------
@@ -500,9 +500,9 @@ if st.session_state.pairs:
 
         # Trading signal
         if df_coint.iloc[-1] < lower_bound3:
-            st.success("Trading Signal: Buy (Residuals are below the lower threshold)")
+            st.success("➕ Trading Signal: Buy (Residuals are below the lower threshold)")
         elif df_coint.iloc[-1] > upper_bound3:
-            st.error("Trading Signal: Sell (Residuals are above the upper threshold)")
+            st.error("➖ Trading Signal: Sell (Residuals are above the upper threshold)")
 
 
     # Range Ratio
@@ -559,9 +559,9 @@ if st.session_state.pairs:
 
         # Trading signal
         if range_diff.iloc[-1] < lower_bound4:
-            st.success("Trading Signal: Buy (Residuals are below the lower threshold)")
+            st.error(f"🚨 Range of {ticker2} spiking")
         elif range_diff.iloc[-1] > upper_bound4:
-            st.error("Trading Signal: Sell (Residuals are above the upper threshold)")
+            st.error(f"🚨 Range of {ticker1} spiking")
 
         
 
