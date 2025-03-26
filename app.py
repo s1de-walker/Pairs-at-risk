@@ -601,7 +601,7 @@ def custom_box(message, color="#1E90FF"):
     )
 
 if price_ratio_signal == 1:
-    custom_box("🟢 Success Message", color="#28A745")  # Green box
+    custom_box("🟢 Slightly transparent green box", color="rgba(40, 167, 69, 0.7)")  # 70% opacity
     st.success("➕ Long Signal: Price Ratio below lower bound")
     st.info("Check **Price Ratio**")
 elif price_ratio_signal == -1:
