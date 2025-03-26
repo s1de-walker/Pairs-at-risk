@@ -464,7 +464,7 @@ if st.session_state.pairs:
             x1=df_coint_plot["Time"].max(),
             y0=lower_bound3,
             y1=upper_bound3,
-            fillcolor="rgba(64, 64, 64, 0.4)",  # Custom color with 30% opacity
+            fillcolor="rgba(64, 64, 64, 0.6)",  # Custom color with 30% opacity
             line=dict(width=0)
         )
         
