@@ -602,9 +602,9 @@ elif range_signal == -1:
     st.error(f"🚨 Range of {ticker1} spiking")
 
 if coint_signal == 1:
-    st.error("➖ Trading Signal: Sell (Residuals are above the upper threshold)")
+    st.warning(f"➖ Trading Signal: Short pair: {ticker2} undervalued or {ticker1} overvalued")
 elif coint_signal == -1:
-    st.success("➕ Trading Signal: Buy (Residuals are below the lower threshold)")
+    st.success(f"➕ Trading Signal: Long pair: {ticker1} undervalued or {ticker2} overvalued")
     
     
     
