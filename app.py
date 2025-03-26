@@ -550,13 +550,19 @@ if st.session_state.pairs:
             y1=upper_bound4,
             fillcolor="rgba(64,64,64, 0.7)",  # Custom color with 30% opacity
             line=dict(width=0)
-        )
+        )        
 
         
-
         # Display the plot in Streamlit
         st.plotly_chart(fig_rr)
         #st.dataframe(df_range_diff)
+
+        # Trading signal
+        if range_diff.iloc[-1] < lower_bound4:
+            st.success("Trading Signal: Buy (Residuals are below the lower threshold)")
+        elif range_diff.iloc[-1] > upper_bound4:
+            st.error("Trading Signal: Sell (Residuals are above the upper threshold)")
+
         
 
                 
