@@ -563,6 +563,16 @@ if st.session_state.pairs:
         elif range_diff.iloc[-1] > upper_bound4:
             st.error(f"🚨 Range of {ticker1} spiking")
 
+
+
+# Signals
+# =======
+
+if data['Price Ratio'].iloc[-1] < lower_bound:
+            st.success("➕ Long Signal: Price Ratio below lower bound")
+        elif data['Price Ratio'].iloc[-1] > upper_bound:
+            st.warning("➖ Short Signal: Price Ratio above upper bound")
+
         
 
                 
