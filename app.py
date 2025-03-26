@@ -600,9 +600,9 @@ if range_signal == 1:
 elif range_signal == -1:
     st.error(f"🚨 Range of {ticker1} spiking")
 
-if coint_signal = 1:
+if coint_signal == 1:
     st.success("➕ Trading Signal: Buy (Residuals are below the lower threshold)")
-elif coint_signal = -1:
+elif coint_signal == -1:
     st.error("➖ Trading Signal: Sell (Residuals are above the upper threshold)")
     
     
