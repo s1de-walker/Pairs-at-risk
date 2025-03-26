@@ -570,9 +570,9 @@ if st.session_state.pairs:
 # Signals
 # =======
 
-if price_ratio_signal = 1:
+if price_ratio_signal == 1:
     st.success("➕ Long Signal: Price Ratio below lower bound")
-elif price_ratio_signal = -1:
+elif price_ratio_signal == -1:
     st.warning("➖ Short Signal: Price Ratio above upper bound")
 
         
