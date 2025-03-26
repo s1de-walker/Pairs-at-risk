@@ -1,0 +1,10 @@
+streamlit
+yfinance
+pandas
+numpy
+altair
+statsmodels
+scipy
+plotly
+matplotlib
+statsmodels
