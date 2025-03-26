@@ -582,26 +582,7 @@ if st.session_state.pairs:
 # Signals
 # =======
 
-def custom_box(message, color="#1E90FF", color2="#1E90FF"):  
-    st.markdown(
-        f"""
-        <div style="
-            background-color: {color}; 
-            color: {color2}; 
-            padding: 15px; 
-            border-radius: 10px; 
-            font-size: 18px;
-            text-align: left;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-        ">
-            {message}
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
 if price_ratio_signal == 1:
-    custom_box("➕ Long Signal: Price Ratio below lower bound", color="rgba(40, 167, 69, 0.4)", color2 = "grey")  # 70% opacity
     st.success("➕ Long Signal: Price Ratio below lower bound")
     st.info("Check **Price Ratio**")
 elif price_ratio_signal == -1:
