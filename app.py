@@ -79,6 +79,8 @@ st.divider()
 
 price_ratio_signal = 0
 st_vol_signal = 0
+range_signal = 0
+coint_signal = 0
 
 # Fetching data
 # ------------------------------------
@@ -512,8 +514,10 @@ if st.session_state.pairs:
         # Trading signal
         if df_coint.iloc[-1] < lower_bound3:
             st.success("➕ Trading Signal: Buy (Residuals are below the lower threshold)")
+            coint_signal = 1
         elif df_coint.iloc[-1] > upper_bound3:
             st.error("➖ Trading Signal: Sell (Residuals are above the upper threshold)")
+            coint_signal = -1
 
 
     # Range Ratio
@@ -571,8 +575,10 @@ if st.session_state.pairs:
         # Trading signal
         if range_diff.iloc[-1] < lower_bound4:
             st.error(f"🚨 Range of {ticker2} spiking")
+            range_signal = 1
         elif range_diff.iloc[-1] > upper_bound4:
             st.error(f"🚨 Range of {ticker1} spiking")
+            range_signal = -1
 
 
 
@@ -588,6 +594,22 @@ if st_vol_signal == 1:
     st.error("🚨 Warning: Short term volatility has spiked")
 elif st_vol_signal == -1:
     st.error("🚨 Warning: Short term volatility has dropped significantly")
+
+if range_signal == 1:
+    st.error(f"🚨 Range of {ticker2} spiking")
+elif range_signal == -1:
+    st.error(f"🚨 Range of {ticker1} spiking")
+
+if coint_signal = 1:
+    st.success("➕ Trading Signal: Buy (Residuals are below the lower threshold)")
+elif coint_signal = -1:
+    st.error("➖ Trading Signal: Sell (Residuals are above the upper threshold)")
+    
+    
+    
+
+
+    
     
         
 
