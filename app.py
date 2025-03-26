@@ -513,11 +513,11 @@ if st.session_state.pairs:
 
         # Trading signal
         if df_coint.iloc[-1] < lower_bound3:
-            st.error("➖ Trading Signal: Sell (Residuals are above the upper threshold)")
+            st.error("➖ Trading Signal: Sell (Residuals are below the lower threshold)")
             coint_signal = 1
             
         elif df_coint.iloc[-1] > upper_bound3:
-            st.success("➕ Trading Signal: Buy (Residuals are below the lower threshold)")
+            st.success("➕ Trading Signal: Buy (Residuals are above the upper threshold)")
             coint_signal = -1
 
 
