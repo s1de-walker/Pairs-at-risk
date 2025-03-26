@@ -591,7 +591,7 @@ def custom_box(message, color="#1E90FF"):
             padding: 15px; 
             border-radius: 10px; 
             font-size: 18px;
-            text-align: center;
+            text-align: left;
             box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
         ">
             {message}
