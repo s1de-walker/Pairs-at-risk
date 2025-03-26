@@ -569,9 +569,9 @@ if st.session_state.pairs:
 # =======
 
 if data['Price Ratio'].iloc[-1] < lower_bound:
-            st.success("➕ Long Signal: Price Ratio below lower bound")
-        elif data['Price Ratio'].iloc[-1] > upper_bound:
-            st.warning("➖ Short Signal: Price Ratio above upper bound")
+    st.success("➕ Long Signal: Price Ratio below lower bound")
+elif data['Price Ratio'].iloc[-1] > upper_bound:
+    st.warning("➖ Short Signal: Price Ratio above upper bound")
 
         
 
