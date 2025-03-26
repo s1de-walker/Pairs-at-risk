@@ -588,25 +588,31 @@ if st.session_state.pairs:
 
 if price_ratio_signal == 1:
     st.success("➕ Long Signal: Price Ratio below lower bound")
+    st.info("Check **Price Ratio**")
 elif price_ratio_signal == -1:
     st.warning("➖ Short Signal: Price Ratio above upper bound")
+    st.info("Check **Price Ratio**")
 
 if st_vol_signal == 1:
     st.error("🚨 Warning: Short term volatility has spiked")
+    st.info("Check **Rolling Volatility Ratio**")
 elif st_vol_signal == -1:
     st.error("🚨 Warning: Short term volatility has dropped significantly")
+    st.info("Check **Rolling Volatility Ratio**")
 
 if range_signal == 1:
     st.error(f"🚨 Range of {ticker2} spiking")
+    st.info("Check **Range Difference**")
 elif range_signal == -1:
     st.error(f"🚨 Range of {ticker1} spiking")
+    st.info("Check **Range Difference**")
 
 if coint_signal == 1:
     st.warning(f"➖ Trading Signal: Short pair: {ticker2} undervalued or {ticker1} overvalued")
-    st.info("Check Cointegration")
+    st.info("Check **Cointegration**")
 elif coint_signal == -1:
     st.success(f"➕ Trading Signal: Long pair: {ticker1} undervalued or {ticker2} overvalued")
-    st.info("Check Cointegration")
+    st.info("Check **Cointegration**")
     
     
     
