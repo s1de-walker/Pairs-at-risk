@@ -198,139 +198,138 @@ if st.session_state.pairs:
         col1, col2, col3, col4, col5 = st.columns([2, 3, 1, 2, 3])
         percentile2 = col1.number_input("Select Percentile:", min_value=50.00, max_value=99.99, value=90.00, format="%.2f", key="percentile_input")
             
-        # Button to Calculate Rolling Volatility
-        if st.button("Calculate Annualized Rolling Volatility"):
-            # Calculate rolling volatility for each stock
-            rolling_volatility_ticker1_short = returns[ticker1].rolling(window=short_vol_window).std().dropna()*units1
-            rolling_volatility_ticker2_short = returns[ticker2].rolling(window=short_vol_window).std().dropna()*units2
-
-            # Calculate long-term rolling volatility for each stock
-            rolling_volatility_ticker1_long = returns[ticker1].rolling(window=long_vol_window).std().dropna() * units1
-            rolling_volatility_ticker2_long = returns[ticker2].rolling(window=long_vol_window).std().dropna() * units2
-
-            #st.dataframe(rolling_volatility_ticker1)
-            #st.dataframe(rolling_volatility_ticker2)
-
-            # Calculate rolling volatility ratio (ticker1 / ticker2)
-            #rolling_volatility_ratio = rolling_volatility_ticker1 / rolling_volatility_ticker2
-            
-            # Rename column for the ratio
-            #rolling_volatility_ratio = rolling_volatility_ratio.rename('Rolling Volatility Ratio')
-            #st.dataframe(rolling_volatility_ratio)
-
-            # Calculate rolling volatility ratio (ticker1 / ticker2)
-            rolling_volatility_ratio_short = rolling_volatility_ticker1_short / rolling_volatility_ticker2_short
-            rolling_volatility_ratio_long = rolling_volatility_ticker1_long / rolling_volatility_ticker2_long
-            
-            # Drop NaN values to start the chart from where the data is available
-            rolling_volatility_ratio_short = rolling_volatility_ratio_short.dropna()
-            rolling_volatility_ratio_long = rolling_volatility_ratio_long.dropna()
-            
-            
-
-            # Create a DataFrame for plotting
-            rolling_volatility_df = pd.DataFrame({
-                'Date': rolling_volatility_ratio_short.index,
-                'Rolling Volatility Ratio (Short-Term)': rolling_volatility_ratio_short.values,
-                'Rolling Volatility Ratio (Long-Term)': rolling_volatility_ratio_long.reindex(rolling_volatility_ratio_short.index).values
-            })
         
-            # Create Plotly figure for rolling volatility ratio
-            fig_volatility_ratio = px.line(
-                rolling_volatility_df,
-                x='Date',
-                y=['Rolling Volatility Ratio (Short-Term)', 'Rolling Volatility Ratio (Long-Term)'],
-                title=f"Rolling Volatility Ratio ({units1}.{ticker1} / {units2}.{ticker2})",
-                labels={'value': 'Volatility Ratio', 'variable': 'Rolling Volatility Type'},
-                color_discrete_map={
-                    'Rolling Volatility Ratio (Short-Term)': 'red',
-                    'Rolling Volatility Ratio (Long-Term)': 'grey'
-                }
-            )
-            
-            # Update layout for legend position and other customizations
-            fig_volatility_ratio.update_layout(
-                legend=dict(
-                    orientation="h",
-                    yanchor="bottom",
-                    y=-0.3,
-                    xanchor="center",
-                    x=0.5,
-                    title_text=None  # This removes the legend title
-                )
-            )
+        # Calculate rolling volatility for each stock
+        rolling_volatility_ticker1_short = returns[ticker1].rolling(window=short_vol_window).std().dropna()*units1
+        rolling_volatility_ticker2_short = returns[ticker2].rolling(window=short_vol_window).std().dropna()*units2
 
-            
-            # Show chart in Streamlit
-            st.plotly_chart(fig_volatility_ratio)
+        # Calculate long-term rolling volatility for each stock
+        rolling_volatility_ticker1_long = returns[ticker1].rolling(window=long_vol_window).std().dropna() * units1
+        rolling_volatility_ticker2_long = returns[ticker2].rolling(window=long_vol_window).std().dropna() * units2
 
+        #st.dataframe(rolling_volatility_ticker1)
+        #st.dataframe(rolling_volatility_ticker2)
 
-            # ROLLING VOLATILITY GAP
-            # Ensure both series have the same indexes
-            rolling_volatility_ratio_long_aligned = rolling_volatility_ratio_long.reindex(rolling_volatility_ratio_short.index)
-            
-            # Calculate the gap between short-term and long-term rolling volatility ratios
-            volatility_ratio_gap = rolling_volatility_ratio_short - rolling_volatility_ratio_long_aligned
-            
-            # Create a DataFrame for plotting the gap
-            volatility_ratio_gap_df = pd.DataFrame({
-                'Date': volatility_ratio_gap.index,
-                'Volatility Ratio Gap': volatility_ratio_gap.values
-            })
-
-            volatility_ratio_gap_df = volatility_ratio_gap_df.dropna()
-            
-            lower_bound2 = np.percentile(volatility_ratio_gap_df['Volatility Ratio Gap'], 100-percentile2)
-            upper_bound2 = np.percentile(volatility_ratio_gap_df['Volatility Ratio Gap'], percentile2)
-            
-            
-            # Create Plotly figure for volatility ratio gap
-            fig_volatility_ratio_gap = px.line(
-                volatility_ratio_gap_df,
-                x='Date',
-                y='Volatility Ratio Gap',
-                title=f"Gap Between Short-Term and Long-Term Volatility Ratios ({units1}.{ticker1} / {units2}.{ticker2})",
-                labels={'Volatility Ratio Gap': 'Volatility Ratio Gap'}
-            )
-            fig_volatility_ratio_gap.update_traces(line=dict(color='#A55B4B'))  
-
-            # Add horizontal lines for percentiles and mean
-            fig_volatility_ratio_gap.add_hline(y=upper_bound2, line_dash="solid", line_color="grey")
-            fig_volatility_ratio_gap.add_hline(y=lower_bound2, line_dash="solid", line_color="grey")
-            mean_value = volatility_ratio_gap_df['Volatility Ratio Gap'].mean()
-            fig_volatility_ratio_gap.add_hline(y=mean_value, line_dash="dot", line_color="grey")
-                
+        # Calculate rolling volatility ratio (ticker1 / ticker2)
+        #rolling_volatility_ratio = rolling_volatility_ticker1 / rolling_volatility_ticker2
         
-            # Update layout for legend position and other customizations
-            fig_volatility_ratio_gap.update_layout(
-                legend=dict(
-                    orientation="h",
-                    yanchor="bottom",
-                    y=-0.3,
-                    xanchor="center",
-                    x=0.5,
-                    title_text=None  # This removes the legend title
-                )
-            )
+        # Rename column for the ratio
+        #rolling_volatility_ratio = rolling_volatility_ratio.rename('Rolling Volatility Ratio')
+        #st.dataframe(rolling_volatility_ratio)
 
-            # Add a translucent film from lower bound to upper bound with custom color
-            fig_volatility_ratio_gap.add_shape(
-                type="rect",
-                x0=volatility_ratio_gap_df["Date"].min(),
-                x1=volatility_ratio_gap_df["Date"].max(),
-                y0=lower_bound2,
-                y1=upper_bound2,
-                fillcolor="rgba(64,64,64, 0.7)",  # Custom color with 30% opacity
-                line=dict(width=0)
-            )
+        # Calculate rolling volatility ratio (ticker1 / ticker2)
+        rolling_volatility_ratio_short = rolling_volatility_ticker1_short / rolling_volatility_ticker2_short
+        rolling_volatility_ratio_long = rolling_volatility_ticker1_long / rolling_volatility_ticker2_long
+        
+        # Drop NaN values to start the chart from where the data is available
+        rolling_volatility_ratio_short = rolling_volatility_ratio_short.dropna()
+        rolling_volatility_ratio_long = rolling_volatility_ratio_long.dropna()
+        
+        
+
+        # Create a DataFrame for plotting
+        rolling_volatility_df = pd.DataFrame({
+            'Date': rolling_volatility_ratio_short.index,
+            'Rolling Volatility Ratio (Short-Term)': rolling_volatility_ratio_short.values,
+            'Rolling Volatility Ratio (Long-Term)': rolling_volatility_ratio_long.reindex(rolling_volatility_ratio_short.index).values
+        })
     
-            # Show chart in Streamlit
-            st.plotly_chart(fig_volatility_ratio_gap)
+        # Create Plotly figure for rolling volatility ratio
+        fig_volatility_ratio = px.line(
+            rolling_volatility_df,
+            x='Date',
+            y=['Rolling Volatility Ratio (Short-Term)', 'Rolling Volatility Ratio (Long-Term)'],
+            title=f"Rolling Volatility Ratio ({units1}.{ticker1} / {units2}.{ticker2})",
+            labels={'value': 'Volatility Ratio', 'variable': 'Rolling Volatility Type'},
+            color_discrete_map={
+                'Rolling Volatility Ratio (Short-Term)': 'red',
+                'Rolling Volatility Ratio (Long-Term)': 'grey'
+            }
+        )
+        
+        # Update layout for legend position and other customizations
+        fig_volatility_ratio.update_layout(
+            legend=dict(
+                orientation="h",
+                yanchor="bottom",
+                y=-0.3,
+                xanchor="center",
+                x=0.5,
+                title_text=None  # This removes the legend title
+            )
+        )
+
+        
+        # Show chart in Streamlit
+        st.plotly_chart(fig_volatility_ratio)
 
 
-            # Check if the spread crosses either of the thresholds
-            if volatility_ratio_gap_df['Volatility Ratio Gap'].iloc[-1] > upper_bound2 or volatility_ratio_gap_df['Volatility Ratio Gap'].iloc[-1] < lower_bound2:
-                st.error("🚨 Warning: The spread has crossed the threshold!")
+        # ROLLING VOLATILITY GAP
+        # Ensure both series have the same indexes
+        rolling_volatility_ratio_long_aligned = rolling_volatility_ratio_long.reindex(rolling_volatility_ratio_short.index)
+        
+        # Calculate the gap between short-term and long-term rolling volatility ratios
+        volatility_ratio_gap = rolling_volatility_ratio_short - rolling_volatility_ratio_long_aligned
+        
+        # Create a DataFrame for plotting the gap
+        volatility_ratio_gap_df = pd.DataFrame({
+            'Date': volatility_ratio_gap.index,
+            'Volatility Ratio Gap': volatility_ratio_gap.values
+        })
+
+        volatility_ratio_gap_df = volatility_ratio_gap_df.dropna()
+        
+        lower_bound2 = np.percentile(volatility_ratio_gap_df['Volatility Ratio Gap'], 100-percentile2)
+        upper_bound2 = np.percentile(volatility_ratio_gap_df['Volatility Ratio Gap'], percentile2)
+        
+        
+        # Create Plotly figure for volatility ratio gap
+        fig_volatility_ratio_gap = px.line(
+            volatility_ratio_gap_df,
+            x='Date',
+            y='Volatility Ratio Gap',
+            title=f"Gap Between Short-Term and Long-Term Volatility Ratios ({units1}.{ticker1} / {units2}.{ticker2})",
+            labels={'Volatility Ratio Gap': 'Volatility Ratio Gap'}
+        )
+        fig_volatility_ratio_gap.update_traces(line=dict(color='#A55B4B'))  
+
+        # Add horizontal lines for percentiles and mean
+        fig_volatility_ratio_gap.add_hline(y=upper_bound2, line_dash="solid", line_color="grey")
+        fig_volatility_ratio_gap.add_hline(y=lower_bound2, line_dash="solid", line_color="grey")
+        mean_value = volatility_ratio_gap_df['Volatility Ratio Gap'].mean()
+        fig_volatility_ratio_gap.add_hline(y=mean_value, line_dash="dot", line_color="grey")
+            
+    
+        # Update layout for legend position and other customizations
+        fig_volatility_ratio_gap.update_layout(
+            legend=dict(
+                orientation="h",
+                yanchor="bottom",
+                y=-0.3,
+                xanchor="center",
+                x=0.5,
+                title_text=None  # This removes the legend title
+            )
+        )
+
+        # Add a translucent film from lower bound to upper bound with custom color
+        fig_volatility_ratio_gap.add_shape(
+            type="rect",
+            x0=volatility_ratio_gap_df["Date"].min(),
+            x1=volatility_ratio_gap_df["Date"].max(),
+            y0=lower_bound2,
+            y1=upper_bound2,
+            fillcolor="rgba(64,64,64, 0.7)",  # Custom color with 30% opacity
+            line=dict(width=0)
+        )
+
+        # Show chart in Streamlit
+        st.plotly_chart(fig_volatility_ratio_gap)
+
+
+        # Check if the spread crosses either of the thresholds
+        if volatility_ratio_gap_df['Volatility Ratio Gap'].iloc[-1] > upper_bound2 or volatility_ratio_gap_df['Volatility Ratio Gap'].iloc[-1] < lower_bound2:
+            st.error("🚨 Warning: The spread has crossed the threshold!")
 
 
     # Rolling Beta
