@@ -38,7 +38,7 @@ end_date = col_date2.date_input("End Date", datetime.strptime(default_end, '%Y-%
 
 # Ensure start_date is before end_date
 if start_date >= end_date:
-    st.error("🚨 Start Date must be before End Date!")
+    st.error("❗ Start Date must be before End Date!")
     st.stop()  # Stops execution immediately after showing error
 
 # Calculate month difference
@@ -64,7 +64,7 @@ with st.form("pairs_form"):
     submit = st.form_submit_button("Confirm Pair")
 
     if submit and ticker1 == ticker2:
-            st.error("🚨 Error: Both tickers cannot be the same! Please select different stocks or ETFs.")
+            st.error("❗ Error: Both tickers cannot be the same! Please select different stocks or ETFs.")
             st.stop()  # Stops execution immediately after showing error
 
     if submit and ticker1 and ticker2:
@@ -94,7 +94,7 @@ if st.session_state.pairs:
         
         # Check if data is empty (invalid ticker)
         if data.empty or ticker1 not in data.columns or ticker2 not in data.columns:
-            st.error("🚨 Error: One or both tickers are invalid. Please enter correct stock/ETF symbols.")
+            st.error("❗ Error: One or both tickers are invalid. Please enter correct stock/ETF symbols.")
             st.stop()  # Stop execution if tickers are invalid
 
         # Check if the DataFrame is not empty and the index is within range
@@ -107,7 +107,7 @@ if st.session_state.pairs:
             st.stop()
         
     except Exception as e:
-        st.error(f"🚨 Error fetching historical data: {e}")
+        st.error(f"❗ Error fetching historical data: {e}")
         st.stop()  # Stops execution immediately after showing error
         
     #returns = data[[ticker1, ticker2]].pct_change().dropna()
