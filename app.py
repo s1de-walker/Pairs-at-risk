@@ -158,7 +158,7 @@ if st.session_state.pairs:
             x1=data.index.max(),
             y0=lower_bound,
             y1=upper_bound,
-            fillcolor="rgba(64,64,64, 0.7)",  # Custom color with 30% opacity
+            fillcolor="rgba(64,64,64, 0.3)",  # Custom color with 30% opacity
             line=dict(width=0)
         )
     
