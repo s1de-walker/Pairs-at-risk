@@ -73,7 +73,7 @@ with st.form("pairs_form"):
     
 st.divider()
 # Input End------------------------------------
-
+price_ratio_signal = 0
 
 # Fetching data
 # ------------------------------------
@@ -169,8 +169,10 @@ if st.session_state.pairs:
         
         if data['Price Ratio'].iloc[-1] < lower_bound:
             st.success("➕ Long Signal: Price Ratio below lower bound")
+            price_ratio_signal = 1
         elif data['Price Ratio'].iloc[-1] > upper_bound:
             st.warning("➖ Short Signal: Price Ratio above upper bound")
+            price_ratio_signal = -1
             
     # Pair spread
     # ------------------------------------
@@ -568,9 +570,9 @@ if st.session_state.pairs:
 # Signals
 # =======
 
-if data['Price Ratio'].iloc[-1] < lower_bound:
+if price_ratio_signal = 1:
     st.success("➕ Long Signal: Price Ratio below lower bound")
-elif data['Price Ratio'].iloc[-1] > upper_bound:
+elif price_ratio_signal = -1:
     st.warning("➖ Short Signal: Price Ratio above upper bound")
 
         
