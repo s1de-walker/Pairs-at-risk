@@ -537,6 +537,7 @@ if st.session_state.pairs:
 
         # Convert ratios to DataFrame for plotting
         df_range_diff = pd.DataFrame({"Time": range_diff.index, "Range Difference": range_diff})
+        df_range_diff = df_range_diff.dropna()
 
         #st.dataframe(range1)
         #st.dataframe(range2)
