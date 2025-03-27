@@ -173,6 +173,8 @@ if st.session_state.pairs:
         )
     
         st.plotly_chart(fig)
+
+        st.dataframe(data)
         
         if data['Price Ratio'].iloc[-1] < lower_bound:
             st.success("➕ Long Signal: Price Ratio below lower bound")
