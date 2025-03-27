@@ -132,40 +132,41 @@ if st.session_state.pairs:
     # Price Ratio
     # ------------------------------------
     with st.expander(f"Price Ratio"):
-        mean_ratio = data['Price Ratio'].mean()
+        data_pr = data.dropna()
+        mean_ratio = data_pr['Price Ratio'].mean()
         col1, col2, col3, col4, col5 = st.columns([2, 3, 1, 2, 3])
         percentile = col1.number_input("Select Percentile:", min_value=50.00, max_value=99.99, value=95.00, format="%.2f")
-        lower_bound = np.percentile(data['Price Ratio'], 100-percentile)
-        upper_bound = np.percentile(data['Price Ratio'], percentile)
+        lower_bound = np.percentile(data_pr['Price Ratio'], 100-percentile)
+        upper_bound = np.percentile(data_pr['Price Ratio'], percentile)
     
-        fig = px.line(data, x=data.index, y='Price Ratio', title=f"Price Ratio ({ticker1}/{ticker2})", line_shape='linear')
+        fig = px.line(data_pr, x=data_pr.index, y='Price Ratio', title=f"Price Ratio ({ticker1}/{ticker2})", line_shape='linear')
         fig.update_traces(line=dict(color='#A55B4B'))  # Custom orange-red color for better contrast
         
         # Mean line with annotation on the left
         fig.add_hline(y=mean_ratio, line_dash="dot", line_color="white", line_width=1.5)
         fig.add_annotation(
-            x=data.index.min(), y=mean_ratio, text="Mean",
+            x=data_pr.index.min(), y=mean_ratio, text="Mean",
             showarrow=False, xanchor="left", font=dict(color="grey", size=10), bgcolor="black"
         )
     
         # Lower Bound with annotation on the left
         fig.add_hline(y=lower_bound, line_dash="solid", line_color="#F2F2F2", line_width=1.5)
         fig.add_annotation(
-            x=data.index.min(), y=lower_bound, text=f"{percentile}th Percentile",
+            x=data_pr.index.min(), y=lower_bound, text=f"{percentile}th Percentile",
             showarrow=False, xanchor="left", font=dict(color="grey", size=10), bgcolor="black"
         )
     
         # Upper Bound with annotation on the left
         fig.add_hline(y=upper_bound, line_dash="solid", line_color="#F2F2F2", line_width=1.5)
         fig.add_annotation(
-            x=data.index.min(), y=upper_bound, text=f"{100 - percentile}th Percentile",
+            x=data_pr.index.min(), y=upper_bound, text=f"{100 - percentile}th Percentile",
             showarrow=False, xanchor="left", font=dict(color="grey", size=10), bgcolor="black"
         )
         # Add a translucent film from lower bound to upper bound with custom color
         fig.add_shape(
             type="rect",
-            x0=data.index.min(),
-            x1=data.index.max(),
+            x0=data_pr.index.min(),
+            x1=data_pr.index.max(),
             y0=lower_bound,
             y1=upper_bound,
             fillcolor="rgba(64,64,64, 0.3)",  # Custom color with 30% opacity
@@ -176,10 +177,10 @@ if st.session_state.pairs:
 
         st.dataframe(data)
         
-        if data['Price Ratio'].iloc[-1] < lower_bound:
+        if data_pr['Price Ratio'].iloc[-1] < lower_bound:
             st.success("➕ Long Signal: Price Ratio below lower bound")
             price_ratio_signal = 1
-        elif data['Price Ratio'].iloc[-1] > upper_bound:
+        elif data_pr['Price Ratio'].iloc[-1] > upper_bound:
             st.warning("➖ Short Signal: Price Ratio above upper bound")
             price_ratio_signal = -1
             
