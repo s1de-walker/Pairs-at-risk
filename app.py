@@ -141,7 +141,7 @@ if st.session_state.pairs:
         fig = px.line(
         cm_returns.reset_index(),  # Ensure Date is a column
         x="Date",  # ✅ Use "Date" as the x-axis
-        y=cm_returns.columns[1:],  # ✅ Use all columns except "Date" for y-axis
+        y=cm_returns.columns,  # ✅ Use all columns except "Date" for y-axis
         title="Cumulative Returns",
         color_discrete_map=color_map
         )
