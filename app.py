@@ -140,12 +140,9 @@ if st.session_state.pairs:
         # Ensure correct column names
         cm_returns.columns = data.columns  # This preserves the order returned by yfinance
 
-        # Reshape data for Plotly
-        cm_returns_melted = cm_returns.reset_index().melt(id_vars="Date", var_name="Stock", value_name="Cumulative Return")
-
         # Create Plotly figure
         fig = px.line(
-            cm_returns_melted,
+            cm_returns,
             x="Date",
             y="Cumulative Return",
             color="Stock",
