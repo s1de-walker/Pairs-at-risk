@@ -136,17 +136,9 @@ if st.session_state.pairs:
             cm_returns.columns[1]: "#5cc8e2",  # Electric Blue
         }
 
-        # Create Plotly figure
-        fig = px.line(
-        cm_returns.reset_index(),  # ✅ Ensure 'Date' is included as a column
-        x="index",  # ✅ Use the index as x-axis (which should be dates)
-        y=cm_returns.columns,  # ✅ Use actual column names for y-axis
-        title="Cumulative Returns",
-        color_discrete_map=color_map
-        )
+        st.dataframe(cm_returns)
         
-        # Show chart in Streamlit
-        st.plotly_chart(fig)
+        
         #st.dataframe(data)
         #st.dataframe(returns)
     # Price Ratio
