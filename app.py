@@ -138,12 +138,11 @@ if st.session_state.pairs:
 
         # Create Plotly figure
         fig = px.line(
-            cm_returns,
-            x=cm_returns.index,
-            y="Cumulative Return",
-            color="Stock",
-            title="Cumulative Returns",
-            color_discrete_map=color_map
+        cm_returns.reset_index(),  # ✅ Ensure 'Date' is included as a column
+        x="index",  # ✅ Use the index as x-axis (which should be dates)
+        y=cm_returns.columns,  # ✅ Use actual column names for y-axis
+        title="Cumulative Returns",
+        color_discrete_map=color_map
         )
         
         # Show chart in Streamlit
