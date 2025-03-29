@@ -136,7 +136,17 @@ if st.session_state.pairs:
             cm_returns.columns[1]: "#5cc8e2",  # Electric Blue
         }
 
-        st.dataframe(cm_returns)
+        #st.dataframe(cm_returns)
+
+        fig = px.line(
+        cm_returns.reset_index(),  # Ensure Date is a column
+        x="Date",  # ✅ Use "Date" as the x-axis
+        y=cm_returns.columns[1:],  # ✅ Use all columns except "Date" for y-axis
+        title="Cumulative Returns",
+        color_discrete_map=color_map
+        )
+    
+        st.plotly_chart(fig)
         
         
         #st.dataframe(data)
