@@ -139,7 +139,7 @@ if st.session_state.pairs:
         # Create Plotly figure
         fig = px.line(
             cm_returns,
-            x="Date",
+            x=cm_returns.index,
             y="Cumulative Return",
             color="Stock",
             title="Cumulative Returns",
