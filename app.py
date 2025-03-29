@@ -18,7 +18,7 @@ from statsmodels.tsa.stattools import adfuller
 # Input
 # ------------------------------------
 # Title
-st.title("Pairs @ Risk")
+st.title("Pairs Watch")
 st.caption("Monitor your trading pairs with risk metrics and alerts.")
 st.write("")
 
