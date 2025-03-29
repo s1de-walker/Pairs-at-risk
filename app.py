@@ -91,7 +91,6 @@ if st.session_state.pairs:
         # Fetch historical data and create required data
         data = yf.download([ticker1, ticker2], start=start_date, end=end_date+ timedelta(days=1))["Close"]
         data = data[[ticker1,ticker2]]
-        data_cr = data.copy()
         data['Price Ratio'] = data[ticker1]/data[ticker2]
         data["Pair Value"] = data[ticker1]*units1 - data[ticker2]*units2
         returns = data.pct_change().dropna()
@@ -127,8 +126,8 @@ if st.session_state.pairs:
         col1, col2 = st.columns(2)
         col1.metric(f"{ticker1}", f"${data[ticker1].iloc[-1]:.2f}", f"{returns[ticker1].iloc[-1] * 100:.2f}%")
         col2.metric(f"{ticker2}", f"${data[ticker2].iloc[-1]:.2f}", f"{returns[ticker2].iloc[-1] * 100:.2f}%")
-
-        returns_cr = data_cr.pct_change().dropna()
+        
+        returns_cr = data[[ticker1,ticker2]].pct_change().dropna()
         cm_returns = (returns_cr + 1).cumprod() - 1
         
         # Define custom colors
@@ -136,9 +135,6 @@ if st.session_state.pairs:
             cm_returns.columns[0]: "#fb580d",  # Fiery Orange
             cm_returns.columns[1]: "#5cc8e2",  # Electric Blue
         }
-
-        # Ensure correct column names
-        cm_returns.columns = data.columns  # This preserves the order returned by yfinance
 
         # Create Plotly figure
         fig = px.line(
