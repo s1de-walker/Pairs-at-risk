@@ -25,7 +25,7 @@ st.write("")
 if 'pairs' not in st.session_state:
     st.session_state.pairs = []
 
-st.write("Enter the date range for analysis.")
+st.write("Enter the date range for analysis:")
 
 # Date Input Section
 col_date1, col_date2 = st.columns(2)
