@@ -19,7 +19,7 @@ from statsmodels.tsa.stattools import adfuller
 # ------------------------------------
 # Title
 st.title("Pairs Watch")
-st.caption("Monitor your trading pairs with risk metrics and alerts.")
+st.caption("Monitor your pairs with risk metrics and alerts.")
 st.write("")
 
 if 'pairs' not in st.session_state:
@@ -33,6 +33,7 @@ default_start = (datetime.today() - timedelta(days=730)).strftime('%Y-%m-%d')
 default_end = datetime.now().strftime('%Y-%m-%d')
 
 # Take user inputs for start and end date
+st.caption("Enter the date range for analysis.")
 start_date = col_date1.date_input("Start Date", datetime.strptime(default_start, '%Y-%m-%d'))
 end_date = col_date2.date_input("End Date", datetime.strptime(default_end, '%Y-%m-%d'))
 
@@ -50,6 +51,7 @@ st.write("")
 st.write("Enter the pair details:")
 
 # Form for user input
+st.caption("Enter the ticker")
 with st.form("pairs_form"):
     col1, col2, col3, col4, col5 = st.columns([2, 3, 1, 2, 3])
     
