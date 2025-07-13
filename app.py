@@ -50,7 +50,7 @@ st.caption(f"Selected period: **{(end_date.year - start_date.year) * 12 + (end_d
 date_range_days = (end_date - start_date).days  # Calculate total available days
 
 st.write("")
-st.write("Enter the pair details (units and tickers):")
+st.write("Enter the units and tickers:")
 
 # Form for user input
 
