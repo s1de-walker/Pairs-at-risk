@@ -25,7 +25,7 @@ st.write("")
 if 'pairs' not in st.session_state:
     st.session_state.pairs = []
 
-st.subheader("Enter the date range for analysis:")
+st.subheader("Enter the date range for analysis")
 
 # Date Input Section
 col_date1, col_date2 = st.columns(2)
@@ -50,7 +50,7 @@ st.caption(f"Selected period: **{(end_date.year - start_date.year) * 12 + (end_d
 date_range_days = (end_date - start_date).days  # Calculate total available days
 
 st.write("")
-st.subheader("Enter the units and tickers:")
+st.subheader("Enter the units and tickers")
 
 # Form for user input
 
