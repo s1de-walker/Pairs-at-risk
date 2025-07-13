@@ -25,6 +25,8 @@ st.write("")
 if 'pairs' not in st.session_state:
     st.session_state.pairs = []
 
+st.write("Enter the date range for analysis.")
+
 # Date Input Section
 col_date1, col_date2 = st.columns(2)
 
@@ -33,7 +35,7 @@ default_start = (datetime.today() - timedelta(days=730)).strftime('%Y-%m-%d')
 default_end = datetime.now().strftime('%Y-%m-%d')
 
 # Take user inputs for start and end date
-st.caption("Enter the date range for analysis.")
+
 start_date = col_date1.date_input("Start Date", datetime.strptime(default_start, '%Y-%m-%d'))
 end_date = col_date2.date_input("End Date", datetime.strptime(default_end, '%Y-%m-%d'))
 
