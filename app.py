@@ -51,7 +51,7 @@ st.write("")
 st.write("Enter the pair details:")
 
 # Form for user input
-st.caption("Enter the ticker")
+st.caption("Enter the tickers.")
 with st.form("pairs_form"):
     col1, col2, col3, col4, col5 = st.columns([2, 3, 1, 2, 3])
     
