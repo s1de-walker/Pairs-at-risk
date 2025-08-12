@@ -59,12 +59,12 @@ with st.form("pairs_form"):
     col1, col2, col3, col4, col5 = st.columns([2, 3, 1, 2, 3])
     
     units1 = col1.number_input("Lots", min_value=1, step=1, key="units1")
-    ticker1 = col2.text_input("Stock/ETF 1").upper()
+    ticker1 = col2.text_input("Stock/ETF 1", value="JPM").upper()
     with col3:
         st.write("")
         st.markdown("<p style='text-align: center; font-size: 24px;'>_</p>", unsafe_allow_html=True)
     units2 = col4.number_input("Lots", min_value=1, step=1, key="units2")
-    ticker2 = col5.text_input("Stock/ETF 2").upper()
+    ticker2 = col5.text_input("Stock/ETF 2",  value="BAC").upper()
     
     submit = st.form_submit_button("Confirm Pair")
 
