@@ -51,6 +51,7 @@ date_range_days = (end_date - start_date).days  # Calculate total available days
 
 st.write("")
 st.subheader("Enter the allocation and tickers")
+st.caption("as per yfinance convention")
 
 # Form for user input
 
