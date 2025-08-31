@@ -677,10 +677,11 @@ with col20:
             # Fetch historical data and create required data
             data_seasonality = yf.download([ticker1, ticker2], start=sd1, end=ed1 + timedelta(days=1))["Close"]
             data_seasonality = data_seasonality[[ticker1,ticker2]]
-            data_seasonality['Price Ratio'] = data_seasonality[ticker1]/data[ticker2]
+            data_seasonality['Price Ratio'] = data_seasonality[ticker1]/data_seasonality[ticker2]
             #data["Pair Value"] = data[ticker1]*units1 - data[ticker2]*units2
             returns_seasonality = data_seasonality.pct_change().dropna()
             #cm_returns = (returns + 1).cumprod() - 1
+            st.dataframe(data_seasonality)
     
             
             # Check if data is empty (invalid ticker)
@@ -706,7 +707,7 @@ with col20:
             st.stop()  # Stops execution immediately after showing error
 
 
-st.dataframe(returns_seasonality)
+
 
 
         
