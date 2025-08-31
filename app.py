@@ -14,6 +14,9 @@ import plotly.graph_objects as go
 import statsmodels.api as sm
 from statsmodels.tsa.stattools import adfuller
 
+# Set app to wide mode
+st.set_page_config(layout="wide")
+
 
 # Input
 # ------------------------------------
