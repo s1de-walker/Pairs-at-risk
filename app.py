@@ -775,7 +775,7 @@ with col20:
             "Avg Return": (avg_return*100).round(1).astype(str) + "%",
             "Median Return": (median_return*100).round(1).astype(str) + "%",
             "Avg of Avg & Median": (avg_median*100).round(1).astype(str) + "%"
-        })
+        }).T
         
         # Reorder months
         month_order = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
