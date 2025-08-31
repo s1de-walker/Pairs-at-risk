@@ -660,23 +660,23 @@ with col20:
     
     # Default values (1-year difference)
     default_start2 = (datetime.today() - timedelta(days=3680)).strftime('%Y-%m-%d')
-    default_end2 = datetime.now().strftime('%Y-%m-%d')
+    default_end3 = datetime.now().strftime('%Y-%m-%d')
     
     # Take user inputs for start and end date
     with col_date10:
         start_date2 = st.date_input("Start Date", datetime.strptime(default_start2, '%Y-%m-%d'))
     with col_date20:
-        end_date2 = st.date_input("End Date", datetime.strptime(default_end2, '%Y-%m-%d'))
+        end_date2 = st.date_input("End Date", datetime.strptime(default_end3, '%Y-%m-%d'))
     
     # Ensure start_date is before end_date
-    if start_date2 >= end_date2:
+    if start_date2 >= end_date3:
         st.error("❗ Start Date must be before End Date!")
         st.stop()  # Stops execution immediately after showing error
     
     # Calculate month difference
-    st.caption(f"Selected period: **{(end_date2.year - start_date2.year) * 12 + (end_date2.month - start_date2.month)} months**")
+    st.caption(f"Selected period: **{(end_date3.year - start_date2.year) * 12 + (end_date3.month - start_date2.month)} months**")
     
-    date_range_days = (end_date2 - start_date2).days  # Calculate total available days
+    date_range_days = (end_date3 - start_date2).days  # Calculate total available days
     
     
 
