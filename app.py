@@ -17,8 +17,8 @@ from statsmodels.tsa.stattools import adfuller
 # Set app to wide mode
 st.set_page_config(layout="wide")
 
-col1, col2 = st.columns(2)
-with col1:
+col10, col20 = st.columns(2)
+with col10:
     
     # Input
     # ------------------------------------
@@ -644,8 +644,8 @@ with col1:
         st.write("Check **Cointegration**")
     
 
-with col2:
-    st.write("Season Check")
+with col20:
+    st.header("Season Check")
     
 
 
