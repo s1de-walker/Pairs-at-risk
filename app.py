@@ -754,25 +754,36 @@ with col20:
         #st.subheader("📅 Monthly Returns Matrix")
         #st.dataframe((returns_matrix*100).round(1).astype(str) + "%")
 
-        # Drop NaN years (clean matrix)
+        # Clean matrix (remove rows with NaN)
         clean_matrix = returns_matrix.dropna(how="all")
         
-        # Stats
-        positive_pct = ((clean_matrix > 0).sum() / clean_matrix.notnull().sum() * 100).round(0)
-        avg_returns = clean_matrix.mean().round(2)
-        median_returns = clean_matrix.median().round(2)
-        avg_of_avg_median = ((avg_returns + median_returns) / 2).round(2)
+        # % positive months (per column)
+        pct_positive = ((clean_matrix > 0).sum() / clean_matrix.notnull().sum() * 100).round(0)
         
-        # Combine stats into DataFrame
-        stats_df = pd.DataFrame({
-            "% Positive Months": positive_pct,
-            "Average Return": avg_returns,
-            "Median Return": median_returns,
-            "Avg of Avg & Median": avg_of_avg_median
-        }).T   # 👈 transpose so rows = stats
+        # Avg returns per month
+        avg_return = clean_matrix.mean()
         
-        st.subheader("📊 Seasonality Stats (Transposed)")
-        st.dataframe(stats_df)
+        # Median returns per month
+        median_return = clean_matrix.median()
+        
+        # Average of avg & median
+        avg_median = (avg_return + median_return) / 2
+        
+        # Combine into dataframe
+        stats = pd.DataFrame({
+            "% Positive": pct_positive.astype(int).astype(str) + "%",
+            "Avg Return": (avg_return*100).round(1).astype(str) + "%",
+            "Median Return": (median_return*100).round(1).astype(str) + "%",
+            "Avg of Avg & Median": (avg_median*100).round(1).astype(str) + "%"
+        })
+        
+        # Reorder months
+        month_order = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+        stats = stats.reindex(month_order)
+        
+        st.subheader("📊 Seasonality Stats by Month")
+        st.dataframe(stats)
+
 
 
         
