@@ -1,4 +1,4 @@
-<img src = screenshots/PW.png width = 1000>
+<img src = screenshots/PW2.png width = 1000>
 
 Quantitative Finance tool to analyze pairs and their risk | Cointegration | Trading signals | Pairs Trading | streamlit web app | Python
 
