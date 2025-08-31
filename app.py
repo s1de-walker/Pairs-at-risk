@@ -705,23 +705,22 @@ with col20:
         })
 
         heatmap = alt.Chart(seasonality).mark_rect().encode(
-        x=alt.X("MonthName:O", 
-                sort=month_order, 
-                title="Month"),
-        y=alt.Y("Year:O", title="Year"),
-        color=alt.Color(
-            "Return:Q",
-            scale=alt.Scale(
-                domain=[-0.1, 0, 0.1], 
-                range=["#d7191c", "#ffffbf", "#1a9641"]  # custom colors
+            x=alt.X("MonthName:O", 
+                    sort=month_order, 
+                    title="Month"),
+            y=alt.Y("Year:O", title="Year"),
+            color=alt.Color(
+                "Return:Q",
+                scale=alt.Scale(
+                    domain=[-0.1, 0, 0.1], 
+                    range=["#d7191c", "#ffffbf", "#1a9641"]  # custom colors
+                ),
+                legend=None
             ),
-            legend=None
-        ),
-        tooltip=["Year", "MonthName", alt.Tooltip("Return", format=".2%")]
-    )
-    
-    st.altair_chart(heatmap, use_container_width=True)
-
+            tooltip=["Year", "MonthName", alt.Tooltip("Return", format=".2%")]
+        )
+        
+        st.altair_chart(heatmap, use_container_width=True)
 
         
         # Check if data is empty (invalid ticker)
