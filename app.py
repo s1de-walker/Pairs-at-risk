@@ -706,6 +706,9 @@ with col20:
             st.stop()  # Stops execution immediately after showing error
 
 
+st.dataframe(returns_seasonality)
+
+
         
 
     
