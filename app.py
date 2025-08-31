@@ -768,13 +768,27 @@ with col20:
         
         # Average of avg & median
         avg_median = (avg_return + median_return) / 2
+
+        # Weighted average returns (latest years get higher weight)
+        weighted_avg = {}
+        for month in clean_matrix.columns:
+            month_returns = clean_matrix[month].dropna()
+            n = len(month_returns)
+            if n > 0:
+                weights = np.arange(1, n+1)  # 1...n
+                weighted_avg[month] = np.average(month_returns.values, weights=weights)
+            else:
+                weighted_avg[month] = np.nan
+        
+        weighted_avg = pd.Series(weighted_avg)
         
         # Combine into dataframe
         stats = pd.DataFrame({
             "% Positive": pct_positive.astype(int).astype(str) + "%",
             "Avg Return": (avg_return*100).round(1).astype(str) + "%",
             "Median Return": (median_return*100).round(1).astype(str) + "%",
-            "Avg of Avg & Median": (avg_median*100).round(1).astype(str) + "%"
+            "Avg of Avg & Median": (avg_median*100).round(1).astype(str) + "%",
+            "Weighted Avg Return": weighted_avg.round(1).astype(str) + "%"
         })
         
         # Reorder months
