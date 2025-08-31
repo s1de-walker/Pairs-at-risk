@@ -654,7 +654,7 @@ with col20:
     if 'pairs_seasonality' not in st.session_state:
             st.session_state.pairs_seasonality = []
         
-    st.subheader("Enter the date range for seasonality analysis")
+    st.subheader("Enter the date range for Seasonality analysis")
     col_sd, col_ed = st.columns(2)
 
     with col_sd:
