@@ -686,7 +686,7 @@ with col20:
 
         # Compute monthly returns from price ratio
         monthly_returns = data_seasonality['Price Ratio'].resample('M').last().pct_change().dropna()
-        st.dataframe(monthly_returns)
+        #st.dataframe(monthly_returns)
 
         # Put monthly returns into Year × Month format
         seasonality = monthly_returns.to_frame(name="Return")
@@ -736,6 +736,23 @@ with col20:
         )
         
         st.altair_chart(chart, use_container_width=True)
+
+        # RETURNS MATRIX
+        # Create Year and Month columns
+        returns_matrix = monthly_returns.to_frame("Return")
+        returns_matrix["Year"] = returns_matrix.index.year
+        returns_matrix["Month"] = returns_matrix.index.month_name().str[:3]  # Jan, Feb, ...
+        
+        # Pivot into matrix (Year = rows, Month = cols)
+        returns_matrix = returns_matrix.pivot(index="Year", columns="Month", values="Return")
+        
+        # Reorder columns by calendar month
+        month_order = ["Jan","Feb","Mar","Apr","May","Jun","Jul",
+                       "Aug","Sep","Oct","Nov","Dec"]
+        returns_matrix = returns_matrix.reindex(columns=month_order)
+        
+        st.subheader("📅 Monthly Returns Matrix")
+        st.dataframe((returns_matrix*100).round(1).astype(str) + "%")
 
         
         # Check if data is empty (invalid ticker)
