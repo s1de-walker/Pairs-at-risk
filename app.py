@@ -697,7 +697,7 @@ with col20:
                 st.error(f"No data available for {ticker1}. Please check your data source.")
                 st.stop()
 
-            st.dataframe(data_seasonality)
+            st.dataframe(returns_seasonality)
             
         except Exception as e:
             st.error(f"❗ Error fetching historical data: {e}")
