@@ -686,6 +686,20 @@ with col20:
         monthly_returns = data_seasonality['Price Ratio'].resample('M').last().pct_change().dropna()
         st.dataframe(monthly_returns)
 
+        # Put monthly returns into Year × Month format
+        seasonality = monthly_returns.to_frame(name="Return")
+        seasonality['Year'] = seasonality.index.year
+        seasonality['Month'] = seasonality.index.month
+        
+        # Pivot table: rows = Year, cols = Month
+        seasonality_table = seasonality.pivot(index="Year", columns="Month", values="Return")
+
+        plt.figure(figsize=(12,6))
+        sns.heatmap(seasonality_table, cmap="RdYlGn", center=0, annot=True, fmt=".1%")
+        plt.title("Monthly Seasonality of Price Ratio")
+        plt.xlabel("Month")
+        plt.ylabel("Year")
+        st.pyplot(plt.gcf())
 
         
         # Check if data is empty (invalid ticker)
