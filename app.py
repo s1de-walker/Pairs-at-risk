@@ -17,15 +17,17 @@ from statsmodels.tsa.stattools import adfuller
 # Set app to wide mode
 st.set_page_config(layout="wide")
 
+st.title("Pairs Watch")
+st.caption("Monitor your pairs with risk metrics and alerts.")
+st.write("")
+
 col10, col20 = st.columns(2)
 with col10:
     
     # Input
     # ------------------------------------
     # Title
-    st.title("Pairs Watch")
-    st.caption("Monitor your pairs with risk metrics and alerts.")
-    st.write("")
+    
     
     if 'pairs' not in st.session_state:
         st.session_state.pairs = []
