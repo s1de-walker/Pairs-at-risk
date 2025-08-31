@@ -674,6 +674,9 @@ with col20:
         data_seasonality = yf.download([ticker1, ticker2], start=sd1, end=ed1 + timedelta(days=1))["Close"]
         data_seasonality = data_seasonality[[ticker1,ticker2]]
         data_seasonality['Price Ratio'] = data_seasonality[ticker1]/data_seasonality[ticker2]
+        
+        # make sure index is datetime for resample to work
+        data_seasonality.index = pd.to_datetime(data_seasonality.index)
     
         #returns_seasonality = data_seasonality.pct_change().dropna()
         
