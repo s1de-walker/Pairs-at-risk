@@ -645,6 +645,7 @@ with col1:
     
 
 with col1:
+    st.write("")
     
 
 
