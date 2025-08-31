@@ -112,8 +112,9 @@ with col10:
             returns = data.pct_change().dropna()
             #cm_returns = (returns + 1).cumprod() - 1
     
-            data_high = yf.download([ticker1, ticker2], start=start_date, end=end_date+ timedelta(days=1))["High"]
-            data_low = yf.download([ticker1, ticker2], start=start_date, end=end_date+ timedelta(days=1))["Low"]
+            # Extract highs and lows, ensure DataFrame
+            data_high = data["High"].to_frame() if isinstance(data["High"], pd.Series) else data["High"]
+            data_low  = data["Low"].to_frame()  if isinstance(data["Low"], pd.Series)  else data["Low"]
             
             # Check if data is empty (invalid ticker)
             if data.empty or ticker1 not in data.columns or ticker2 not in data.columns:
