@@ -23,7 +23,7 @@ st.title("Pairs Watch")
 st.caption("Monitor your pairs with risk metrics and alerts.")
 st.write("")
 
-col10, colmid, col20 = st.columns((3,0.25,0.3))
+col10, colmid, col20 = st.columns((1,0.1,1))
 with col10:
     
     # Input
