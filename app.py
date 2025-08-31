@@ -664,7 +664,7 @@ with col20:
     
     # Take user inputs for start and end date
     with col_date10:
-        start_date2 = cdate_input("Start Date", datetime.strptime(default_start2, '%Y-%m-%d'))
+        start_date2 = date_input("Start Date", datetime.strptime(default_start2, '%Y-%m-%d'))
     with col_date10:
         end_date2 = date_input("End Date", datetime.strptime(default_end2, '%Y-%m-%d'))
     
