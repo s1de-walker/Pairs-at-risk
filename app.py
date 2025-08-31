@@ -674,10 +674,15 @@ with col20:
         data_seasonality = yf.download([ticker1, ticker2], start=sd1, end=ed1 + timedelta(days=1))["Close"]
         data_seasonality = data_seasonality[[ticker1,ticker2]]
         data_seasonality['Price Ratio'] = data_seasonality[ticker1]/data_seasonality[ticker2]
-        #data["Pair Value"] = data[ticker1]*units1 - data[ticker2]*units2
-        returns_seasonality = data_seasonality.pct_change().dropna()
-        #cm_returns = (returns + 1).cumprod() - 1
-        st.dataframe(data_seasonality)
+    
+        #returns_seasonality = data_seasonality.pct_change().dropna()
+        
+        #st.dataframe(data_seasonality)
+
+        # Compute monthly returns from price ratio
+        monthly_returns = data_seasonality['Price Ratio'].resample('M').last().pct_change().dropna()
+        st.dataframe(monthly_returns)
+
 
         
         # Check if data is empty (invalid ticker)
@@ -694,12 +699,12 @@ with col20:
             st.error(f"No data available for {ticker1}. Please check your data source.")
             st.stop()
 
-        returns_seasonality = returns_seasonality.to_frame()
+        #returns_seasonality = returns_seasonality.to_frame()
 
-        st.dataframe(returns_seasonality)
+        #st.dataframe(returns_seasonality)
         
     except Exception as e:
         st.error(f"❗ Error fetching historical data: {e}")
-        st.stop()  # Stops execution immediately after showing error
+        st.stop()  # Stops execution immediately after showing error 
 
 
