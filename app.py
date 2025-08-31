@@ -717,7 +717,7 @@ with col20:
                 "Return:Q",
                 scale=alt.Scale(
                     domain=[-0.1, 0, 0.1],
-                    range=["#d7191c", "#ffffbf", "#1a9641"]
+                    range=["#b2182b", "#d9d9d9", "#14532d"]
                 ),
                 legend=None
             )
