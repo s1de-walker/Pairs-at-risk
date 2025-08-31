@@ -754,6 +754,37 @@ with col20:
         st.subheader("📅 Monthly Returns Matrix")
         st.dataframe((returns_matrix*100).round(1).astype(str) + "%")
 
+        # Clean matrix (remove rows with NaN)
+        clean_matrix = returns_matrix.dropna(how="all")
+        
+        # % positive months (per column)
+        pct_positive = ((clean_matrix > 0).sum() / clean_matrix.notnull().sum() * 100).round(0)
+        
+        # Avg returns per month
+        avg_return = clean_matrix.mean()
+        
+        # Median returns per month
+        median_return = clean_matrix.median()
+        
+        # Average of avg & median
+        avg_median = (avg_return + median_return) / 2
+        
+        # Combine into dataframe
+        stats = pd.DataFrame({
+            "% Positive": pct_positive.astype(int).astype(str) + "%",
+            "Avg Return": (avg_return*100).round(1).astype(str) + "%",
+            "Median Return": (median_return*100).round(1).astype(str) + "%",
+            "Avg of Avg & Median": (avg_median*100).round(1).astype(str) + "%"
+        })
+        
+        # Reorder months
+        month_order = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+        stats = stats.reindex(month_order)
+        
+        st.subheader("📊 Seasonality Stats by Month")
+        st.dataframe(stats)
+
+
         
         # Check if data is empty (invalid ticker)
         if data_seasonality.empty or ticker1 not in data_seasonality.columns or ticker2 not in data_seasonality.columns:
