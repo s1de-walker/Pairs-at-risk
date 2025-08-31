@@ -644,8 +644,8 @@ with col1:
         st.write("Check **Cointegration**")
     
 
-with col1:
-    st.write("")
+with col2:
+    st.write("Season Check")
     
 
 
