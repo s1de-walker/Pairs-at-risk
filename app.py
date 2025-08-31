@@ -788,7 +788,7 @@ with col20:
             "Avg Return": (avg_return*100).round(1).astype(str) + "%",
             "Median Return": (median_return*100).round(1).astype(str) + "%",
             "Avg of Avg & Median": (avg_median*100).round(1).astype(str) + "%",
-            "Weighted Avg Return": weighted_avg.round(1).astype(str) + "%"
+            "Weighted Avg Return": (weighted_avg*100).round(1).astype(str) + "%"
         })
         
         # Reorder months
