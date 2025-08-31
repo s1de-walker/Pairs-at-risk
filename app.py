@@ -732,7 +732,7 @@ with col20:
         chart = (heatmap + text).properties(
             width=600,
             height=400,
-            title="Monthly Seasonality of Price Ratio"
+            title=f"Monthly Seasonality of {ticker1}/{ticker2}"
         )
         
         st.altair_chart(chart, use_container_width=True)
