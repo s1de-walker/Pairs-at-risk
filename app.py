@@ -650,6 +650,7 @@ with col10:
 
 with col20:
     st.header("Season Check")
+    st.divider()
 
     if 'pairs_seasonality' not in st.session_state:
             st.session_state.pairs_seasonality = []
