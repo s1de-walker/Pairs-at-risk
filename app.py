@@ -664,5 +664,9 @@ with col20:
         sd1 = st.date_input("Start Date", value = date.today() - timedelta(days = 3680))
     with col_ed:
         ed1 = st.date_input("End Date", value = date.today(), min_value = sd1)
+
+
+    months_diff2 = (ed1.year - sd1.year) * 12 + (ed1.month - sd1.month)
+    st.caption(f"Selected time: {months_diff2} months")
     
     
