@@ -704,23 +704,37 @@ with col20:
             7:"Jul", 8:"Aug", 9:"Sep", 10:"Oct", 11:"Nov", 12:"Dec"
         })
 
-        heatmap = alt.Chart(seasonality).mark_rect().encode(
-            x=alt.X("MonthName:O", 
-                    sort=month_order, 
-                    title="Month"),
-            y=alt.Y("Year:O", title="Year"),
+        # Heatmap base
+        base = alt.Chart(seasonality).encode(
+            x=alt.X("MonthName:O", sort=month_order, title="Month"),
+            y=alt.Y("Year:O", title="Year")
+        )
+        
+        # Rectangles with custom scale
+        heatmap = base.mark_rect().encode(
             color=alt.Color(
                 "Return:Q",
                 scale=alt.Scale(
                     domain=[-0.1, 0, 0.1], 
-                    range=["#d7191c", "#ffffbf", "#1a9641"]  # custom colors
+                    range=["#d7191c", "#ffffbf", "#1a9641"]
                 ),
                 legend=None
-            ),
-            tooltip=["Year", "MonthName", alt.Tooltip("Return", format=".2%")]
+            )
         )
         
-        st.altair_chart(heatmap, use_container_width=True)
+        # Text labels (white, formatted as % with 1 decimal)
+        text = base.mark_text(color="white").encode(
+            text=alt.Text("Return:Q", format=".1%")
+        )
+        
+        # Combine
+        chart = (heatmap + text).properties(
+            width=600,
+            height=400,
+            title="Monthly Seasonality of Price Ratio"
+        )
+        
+        st.altair_chart(chart, use_container_width=True)
 
         
         # Check if data is empty (invalid ticker)
