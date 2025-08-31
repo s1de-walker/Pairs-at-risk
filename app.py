@@ -696,33 +696,34 @@ with col20:
         # Pivot table: rows = Year, cols = Month
         seasonality_table = seasonality.pivot(index="Year", columns="Month", values="Return")
 
+        # Month order and labels
         month_order = ["Jan","Feb","Mar","Apr","May","Jun",
-               "Jul","Aug","Sep","Oct","Nov","Dec"]
-
+                       "Jul","Aug","Sep","Oct","Nov","Dec"]
+        
         seasonality["MonthName"] = seasonality["Month"].map({
             1:"Jan", 2:"Feb", 3:"Mar", 4:"Apr", 5:"May", 6:"Jun",
             7:"Jul", 8:"Aug", 9:"Sep", 10:"Oct", 11:"Nov", 12:"Dec"
         })
-
-        # Heatmap base
+        
+        # Base chart
         base = alt.Chart(seasonality).encode(
             x=alt.X("MonthName:O", sort=month_order, title="Month"),
-            y=alt.Y("Year:O", title="Year")
+            y=alt.Y("Year:O", sort="descending", title="Year")   # 👈 reverse order
         )
         
-        # Rectangles with custom scale
+        # Heatmap
         heatmap = base.mark_rect().encode(
             color=alt.Color(
                 "Return:Q",
                 scale=alt.Scale(
-                    domain=[-0.1, 0, 0.1], 
-                    range=["#b2182b", "#d9d9d9", "#14532d"]
+                    domain=[-0.1, 0, 0.1],
+                    range=["#d7191c", "#ffffbf", "#1a9641"]
                 ),
                 legend=None
             )
         )
         
-        # Text labels (white, formatted as % with 1 decimal)
+        # White text with 1 decimal %
         text = base.mark_text(color="white").encode(
             text=alt.Text("Return:Q", format=".1%")
         )
