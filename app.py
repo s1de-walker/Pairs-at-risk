@@ -659,5 +659,7 @@ with col20:
 
     with col_sd:
         sd1 = st.date_input("Start Date", value = date.today() - timedelta(days = 3680))
+    with col_ed:
+        ed1 = st.date_input("End Date", value = date.today(), min_value = sd1)
     
     
