@@ -34,7 +34,7 @@ with col10:
     if 'pairs' not in st.session_state:
         st.session_state.pairs = []
     
-    st.subheader("Enter the date range for analysis")
+    st.subheader("Enter the date range for Technical analysis")
     
     # Date Input Section
     col_date1, col_date2 = st.columns(2)
