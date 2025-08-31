@@ -734,7 +734,8 @@ with col20:
             height=400,
             title=f"Monthly Seasonality of {ticker1}/{ticker2}"
         )
-        
+
+        st.subheader("Seasonality Heatmap")
         st.altair_chart(chart, use_container_width=True)
 
         # RETURNS MATRIX
