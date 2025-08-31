@@ -694,7 +694,7 @@ with col20:
             st.stop()  # Stop execution if tickers are invalid
 
         # Check if the DataFrame is not empty and the index is within range
-        if data_seasonality.empty 
+        if data_seasonality.empty:
             st.error("DataFrames are empty. Please check your data source.")
             st.stop()
         
