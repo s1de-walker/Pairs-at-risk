@@ -655,7 +655,7 @@ with col20:
     st.subheader("Enter the date range for seasonality analysis")
     
     # Date Input Section
-    col_date1, col_date2 = st.columns(2)
+    col_date10, col_date20 = st.columns(2)
     
     # Default values (1-year difference)
     default_start2 = (datetime.today() - timedelta(days=3680)).strftime('%Y-%m-%d')
@@ -663,8 +663,8 @@ with col20:
     
     # Take user inputs for start and end date
     
-    start_date2 = col_date1.date_input("Start Date", datetime.strptime(default_start2, '%Y-%m-%d'))
-    end_date2 = col_date2.date_input("End Date", datetime.strptime(default_end2, '%Y-%m-%d'))
+    start_date2 = col_date10.date_input("Start Date", datetime.strptime(default_start2, '%Y-%m-%d'))
+    end_date2 = col_date20.date_input("End Date", datetime.strptime(default_end2, '%Y-%m-%d'))
     
     # Ensure start_date is before end_date
     if start_date2 >= end_date2:
