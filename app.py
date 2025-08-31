@@ -649,32 +649,32 @@ with col10:
 with col20:
     st.header("Season Check")
 
-    if 'pairs' not in st.session_state:
-            st.session_state.pairs = []
+    if 'pairs_seasonality' not in st.session_state:
+            st.session_state.pairs_seasonality = []
         
-            st.subheader("Enter the date range for seasonality analysis")
-            
-            # Date Input Section
-            col_date1, col_date2 = st.columns(2)
-            
-            # Default values (1-year difference)
-            default_start2 = (datetime.today() - timedelta(days=3680)).strftime('%Y-%m-%d')
-            default_end2 = datetime.now().strftime('%Y-%m-%d')
-            
-            # Take user inputs for start and end date
-            
-            start_date2 = col_date1.date_input("Start Date", datetime.strptime(default_start2, '%Y-%m-%d'))
-            end_date2 = col_date2.date_input("End Date", datetime.strptime(default_end2, '%Y-%m-%d'))
-            
-            # Ensure start_date is before end_date
-            if start_date2 >= end_date2:
-                st.error("❗ Start Date must be before End Date!")
-                st.stop()  # Stops execution immediately after showing error
-            
-            # Calculate month difference
-            st.caption(f"Selected period: **{(end_date2.year - start_date2.year) * 12 + (end_date2.month - start_date2.month)} months**")
-            
-            date_range_days = (end_date2 - start_date2).days  # Calculate total available days
+    st.subheader("Enter the date range for seasonality analysis")
+    
+    # Date Input Section
+    col_date1, col_date2 = st.columns(2)
+    
+    # Default values (1-year difference)
+    default_start2 = (datetime.today() - timedelta(days=3680)).strftime('%Y-%m-%d')
+    default_end2 = datetime.now().strftime('%Y-%m-%d')
+    
+    # Take user inputs for start and end date
+    
+    start_date2 = col_date1.date_input("Start Date", datetime.strptime(default_start2, '%Y-%m-%d'))
+    end_date2 = col_date2.date_input("End Date", datetime.strptime(default_end2, '%Y-%m-%d'))
+    
+    # Ensure start_date is before end_date
+    if start_date2 >= end_date2:
+        st.error("❗ Start Date must be before End Date!")
+        st.stop()  # Stops execution immediately after showing error
+    
+    # Calculate month difference
+    st.caption(f"Selected period: **{(end_date2.year - start_date2.year) * 12 + (end_date2.month - start_date2.month)} months**")
+    
+    date_range_days = (end_date2 - start_date2).days  # Calculate total available days
     
     
 
