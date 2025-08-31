@@ -653,5 +653,9 @@ with col20:
             st.session_state.pairs_seasonality = []
         
     st.subheader("Enter the date range for seasonality analysis")
+    col_sd, col_ed = st.columns(2)
+
+    with col_sd:
+        sd1 = st.date_input("Start Date", value = date.today() - timedelta(days = 3680))
     
     
