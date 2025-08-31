@@ -23,7 +23,7 @@ st.title("Pairs Watch")
 st.caption("Monitor your pairs with risk metrics and alerts.")
 st.write("")
 
-col10, col20 = st.columns(2)
+col10, colmid, col20 = st.columns(3,0.25,0.3)
 with col10:
     
     # Input
@@ -646,7 +646,9 @@ with col10:
     elif coint_signal == -1:
         st.success(f"➕ Trading Signal: Long pair: {ticker1} undervalued or {ticker2} overvalued")
         st.write("Check **Cointegration**")
-    
+        
+with colmid:
+    st.write("")
 
 with col20:
     st.header("Season Check")
