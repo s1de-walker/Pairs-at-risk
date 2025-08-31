@@ -696,22 +696,32 @@ with col20:
         # Pivot table: rows = Year, cols = Month
         seasonality_table = seasonality.pivot(index="Year", columns="Month", values="Return")
 
-        # Heatmap with custom color range
+        month_order = ["Jan","Feb","Mar","Apr","May","Jun",
+               "Jul","Aug","Sep","Oct","Nov","Dec"]
+
+        seasonality["MonthName"] = seasonality["Month"].map({
+            1:"Jan", 2:"Feb", 3:"Mar", 4:"Apr", 5:"May", 6:"Jun",
+            7:"Jul", 8:"Aug", 9:"Sep", 10:"Oct", 11:"Nov", 12:"Dec"
+        })
+
         heatmap = alt.Chart(seasonality).mark_rect().encode(
-            x=alt.X("Month:O", title="Month"),
-            y=alt.Y("Year:O", title="Year"),
-            color=alt.Color(
-                "Return:Q",
-                scale=alt.Scale(
-                    domain=[-0.1, 0, 0.1],   # adjust domain to fit your data (min, mid, max)
-                    range=["#d7191c", "#ffffbf", "#1a9641"]  # red → yellow → green
-                ),
-                legend=None   # remove legend
+        x=alt.X("MonthName:O", 
+                sort=month_order, 
+                title="Month"),
+        y=alt.Y("Year:O", title="Year"),
+        color=alt.Color(
+            "Return:Q",
+            scale=alt.Scale(
+                domain=[-0.1, 0, 0.1], 
+                range=["#d7191c", "#ffffbf", "#1a9641"]  # custom colors
             ),
-            tooltip=["Year", "Month", alt.Tooltip("Return", format=".2%")]
-        )
-        
-        st.altair_chart(heatmap, use_container_width=True)
+            legend=None
+        ),
+        tooltip=["Year", "MonthName", alt.Tooltip("Return", format=".2%")]
+    )
+    
+    st.altair_chart(heatmap, use_container_width=True)
+
 
         
         # Check if data is empty (invalid ticker)
