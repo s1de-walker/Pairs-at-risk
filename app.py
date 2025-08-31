@@ -42,7 +42,7 @@ with col10:
     col_date1, col_date2 = st.columns(2)
     
     # Default values (1-year difference)
-    default_start = (datetime.today() - timedelta(days=730)).strftime('%Y-%m-%d')
+    default_start = (datetime.today() - timedelta(days=760)).strftime('%Y-%m-%d')
     default_end = datetime.now().strftime('%Y-%m-%d')
     
     # Take user inputs for start and end date
