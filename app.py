@@ -751,8 +751,8 @@ with col20:
                        "Aug","Sep","Oct","Nov","Dec"]
         returns_matrix = returns_matrix.reindex(columns=month_order)
         
-        st.subheader("📅 Monthly Returns Matrix")
-        st.dataframe((returns_matrix*100).round(1).astype(str) + "%")
+        #st.subheader("📅 Monthly Returns Matrix")
+        #st.dataframe((returns_matrix*100).round(1).astype(str) + "%")
 
         # Clean matrix (remove rows with NaN)
         clean_matrix = returns_matrix.dropna(how="all")
