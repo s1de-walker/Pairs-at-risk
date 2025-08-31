@@ -668,52 +668,38 @@ with col20:
 
     months_diff2 = (ed1.year - sd1.year) * 12 + (ed1.month - sd1.month)
     st.caption(f"Selected time: {months_diff2} months")
-
-
-    # Historical Time Series Calculation
-    if st.session_state.pairs_seasonality:
     
-        try:
-            # Fetch historical data and create required data
-            data_seasonality = yf.download([ticker1, ticker2], start=sd1, end=ed1 + timedelta(days=1))["Close"]
-            data_seasonality = data_seasonality[[ticker1,ticker2]]
-            data_seasonality['Price Ratio'] = data_seasonality[ticker1]/data_seasonality[ticker2]
-            #data["Pair Value"] = data[ticker1]*units1 - data[ticker2]*units2
-            returns_seasonality = data_seasonality.pct_change().dropna()
-            #cm_returns = (returns + 1).cumprod() - 1
-            st.dataframe(data_seasonality)
-    
-            
-            # Check if data is empty (invalid ticker)
-            if data_seasonality.empty or ticker1 not in data_seasonality.columns or ticker2 not in data_seasonality.columns:
-                st.error("❗ Error: One or both tickers are invalid. Please enter correct stock/ETF symbols.")
-                st.stop()  # Stop execution if tickers are invalid
-    
-            # Check if the DataFrame is not empty and the index is within range
-            if data_seasonality.empty or returns_seasonality.empty:
-                st.error("DataFrames are empty. Please check your data source.")
-                st.stop()
-            
-            if len(data_seasonality[ticker1]) == 0 or len(returns_seasonality[ticker1]) == 0:
-                st.error(f"No data available for {ticker1}. Please check your data source.")
-                st.stop()
-
-            returns_seasonality = returns_seasonality.to_frame()
-
-            st.dataframe(returns_seasonality)
-            
-        except Exception as e:
-            st.error(f"❗ Error fetching historical data: {e}")
-            st.stop()  # Stops execution immediately after showing error
-
-
-
-
+    try:
+        # Fetch historical data and create required data
+        data_seasonality = yf.download([ticker1, ticker2], start=sd1, end=ed1 + timedelta(days=1))["Close"]
+        data_seasonality = data_seasonality[[ticker1,ticker2]]
+        data_seasonality['Price Ratio'] = data_seasonality[ticker1]/data_seasonality[ticker2]
+        #data["Pair Value"] = data[ticker1]*units1 - data[ticker2]*units2
+        returns_seasonality = data_seasonality.pct_change().dropna()
+        #cm_returns = (returns + 1).cumprod() - 1
+        st.dataframe(data_seasonality)
 
         
+        # Check if data is empty (invalid ticker)
+        if data_seasonality.empty or ticker1 not in data_seasonality.columns or ticker2 not in data_seasonality.columns:
+            st.error("❗ Error: One or both tickers are invalid. Please enter correct stock/ETF symbols.")
+            st.stop()  # Stop execution if tickers are invalid
 
-    
+        # Check if the DataFrame is not empty and the index is within range
+        if data_seasonality.empty or returns_seasonality.empty:
+            st.error("DataFrames are empty. Please check your data source.")
+            st.stop()
+        
+        if len(data_seasonality[ticker1]) == 0 or len(returns_seasonality[ticker1]) == 0:
+            st.error(f"No data available for {ticker1}. Please check your data source.")
+            st.stop()
 
-    
-    
-    
+        returns_seasonality = returns_seasonality.to_frame()
+
+        st.dataframe(returns_seasonality)
+        
+    except Exception as e:
+        st.error(f"❗ Error fetching historical data: {e}")
+        st.stop()  # Stops execution immediately after showing error
+
+
