@@ -1,4 +1,5 @@
-# Pairs-at-risk
+<img src = screenshots/PW.png width = 1000>
+
 Quantitative Finance tool to analyze pairs and their risk | Cointegration | Trading signals | Pairs Trading | streamlit web app | Python
 
 ### Check it out @ [streamlit.app](https://pairs-at-risk-f9sqcqqsmugxtlkpj2cvgr.streamlit.app/)
