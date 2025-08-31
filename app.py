@@ -782,7 +782,7 @@ with col20:
         stats = stats.reindex(month_order)
         
         st.subheader("📊 Seasonality Stats by Month")
-        st.dataframe(stats)
+        st.dataframe(stats.T)
 
 
 
