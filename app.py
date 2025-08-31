@@ -696,13 +696,15 @@ with col20:
             if len(data_seasonality[ticker1]) == 0 or len(returns_seasonality[ticker1]) == 0:
                 st.error(f"No data available for {ticker1}. Please check your data source.")
                 st.stop()
+
+            st.dataframe(data_seasonality)
             
         except Exception as e:
             st.error(f"❗ Error fetching historical data: {e}")
             st.stop()  # Stops execution immediately after showing error
 
 
-        st.dataframe(data_seasonality)
+        
 
     
 
