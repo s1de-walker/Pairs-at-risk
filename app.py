@@ -697,6 +697,8 @@ with col20:
                 st.error(f"No data available for {ticker1}. Please check your data source.")
                 st.stop()
 
+            returns_seasonality = returns_seasonality.to_frame()
+
             st.dataframe(returns_seasonality)
             
         except Exception as e:
