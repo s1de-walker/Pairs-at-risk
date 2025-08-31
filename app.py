@@ -16,6 +16,8 @@ from statsmodels.tsa.stattools import adfuller
 
 from datetime import date, timedelta
 
+import altair as alt
+
 # Set app to wide mode
 st.set_page_config(layout="wide")
 
@@ -694,12 +696,22 @@ with col20:
         # Pivot table: rows = Year, cols = Month
         seasonality_table = seasonality.pivot(index="Year", columns="Month", values="Return")
 
-        plt.figure(figsize=(12,6))
-        sns.heatmap(seasonality_table, cmap="RdYlGn", center=0, annot=True, fmt=".1%")
-        plt.title("Monthly Seasonality of Price Ratio")
-        plt.xlabel("Month")
-        plt.ylabel("Year")
-        st.pyplot(plt.gcf())
+        # Heatmap with custom color range
+        heatmap = alt.Chart(seasonality).mark_rect().encode(
+            x=alt.X("Month:O", title="Month"),
+            y=alt.Y("Year:O", title="Year"),
+            color=alt.Color(
+                "Return:Q",
+                scale=alt.Scale(
+                    domain=[-0.1, 0, 0.1],   # adjust domain to fit your data (min, mid, max)
+                    range=["#d7191c", "#ffffbf", "#1a9641"]  # red → yellow → green
+                ),
+                legend=None   # remove legend
+            ),
+            tooltip=["Year", "Month", alt.Tooltip("Return", format=".2%")]
+        )
+        
+        st.altair_chart(heatmap, use_container_width=True)
 
         
         # Check if data is empty (invalid ticker)
