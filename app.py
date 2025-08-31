@@ -701,6 +701,9 @@ with col20:
             st.error(f"❗ Error fetching historical data: {e}")
             st.stop()  # Stops execution immediately after showing error
 
+
+        st.dataframe(data_seasonality)
+
     
 
     
