@@ -685,7 +685,7 @@ with col20:
         #st.dataframe(data_seasonality)
 
         # Compute monthly returns from price ratio
-        monthly_returns = data_seasonality['Price Ratio'].resample('M').last().pct_change().dropna()
+        monthly_returns = data_seasonality['Price Ratio'].resample('ME').last().pct_change().dropna()
         #st.dataframe(monthly_returns)
 
         # Put monthly returns into Year × Month format
